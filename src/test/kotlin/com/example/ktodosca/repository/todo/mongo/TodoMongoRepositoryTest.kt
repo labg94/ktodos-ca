@@ -4,6 +4,7 @@ import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
 import com.example.ktodosca.domain.todo.TodoId
 import com.example.ktodosca.repository.todo.mongo.dao.TodoMongoDao
+import com.example.ktodosca.shared.mother.todos
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
@@ -42,9 +43,7 @@ class TodoMongoRepositoryTest {
 
     @Nested
     inner class LoadedTodos {
-        private val todos: List<Todo> = (1..10)
-                .map { Todo.fromTask(it.toString()).copy(status = Status.values()[it % 3]) }
-
+        private val todos: List<Todo> = todos()
         @BeforeEach
         fun setUp() {
             runBlocking {

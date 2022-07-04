@@ -2,6 +2,7 @@ package com.example.ktodosca.repository.todo.memory
 
 import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
+import com.example.ktodosca.shared.mother.todos
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Assertions.*
@@ -45,9 +46,7 @@ class InMemoryRepositoryTest {
     fun `when is filter by status should return all by that status`() {
 
         runBlocking {
-            (1..10)
-                    .map { Todo.fromTask(it.toString()).copy(status = Status.values()[it % 3]) }
-                    .map { repository.addTodo(it) }
+            todos().map { repository.addTodo(it) }
 
 
             val filtered =
