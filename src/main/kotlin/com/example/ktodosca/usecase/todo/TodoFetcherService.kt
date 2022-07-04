@@ -4,7 +4,9 @@ import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
 import com.example.ktodosca.domain.todo.repository.GetTodos
 import kotlinx.coroutines.flow.Flow
+import org.springframework.stereotype.Service
 
+@Service
 class TodoFetcherService(private val repository: GetTodos) : TodoFetcher {
     override suspend fun all(): Flow<Todo> = repository.all()
 
