@@ -1,9 +1,9 @@
-package com.example.ktodosca.presentation.rest
+package com.example.ktodosca.presentation.todo.rest
 
 import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
 import com.example.ktodosca.domain.todo.TodoId
-import com.example.ktodosca.presentation.rest.request.TaskRequest
+import com.example.ktodosca.presentation.todo.rest.request.TaskRequest
 import com.example.ktodosca.usecase.todo.NewTaskAdded
 import com.example.ktodosca.usecase.todo.StatusChange
 import com.example.ktodosca.usecase.todo.TodoFetcher

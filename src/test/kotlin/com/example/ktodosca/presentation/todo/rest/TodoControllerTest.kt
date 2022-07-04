@@ -1,8 +1,8 @@
-package com.example.ktodosca.presentation.rest
+package com.example.ktodosca.presentation.todo.rest
 
 import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
-import com.example.ktodosca.presentation.rest.request.TaskRequest
+import com.example.ktodosca.presentation.todo.rest.request.TaskRequest
 import com.example.ktodosca.repository.todo.memory.InMemoryRepository
 import com.example.ktodosca.shared.mother.todos
 import kotlinx.coroutines.flow.filter
