@@ -12,9 +12,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.reactive.asFlow
 import kotlinx.coroutines.reactor.awaitSingle
 import kotlinx.coroutines.reactor.awaitSingleOrNull
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Repository
 
 @Repository
+@Profile("!memory")
 class TodoMongoRepository(private val dao: TodoMongoDao) : CreateTodo, GetTodos, UpdateTodo {
     override suspend fun addTodo(todo: Todo): Todo = dao.save(todo.toDto()).awaitSingle().toDomain()
 
