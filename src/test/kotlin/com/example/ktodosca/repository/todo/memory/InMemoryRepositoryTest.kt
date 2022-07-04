@@ -83,6 +83,28 @@ class InMemoryRepositoryTest {
     }
 
     @Test
+    internal fun `when findById is called and exists should return the same stored`() {
+        runBlocking {
+            val fromTask = Todo.fromTask("dummy")
+
+            repository.addTodo(fromTask)
+
+            assertEquals(fromTask, repository.findById(fromTask.id))
+        }
+
+    }
+
+    @Test
+    internal fun `when findById is called and there is not a todo with the id should return false`() {
+        runBlocking {
+            val fromTask = Todo.fromTask("dummy")
+
+            assertNull(repository.findById(fromTask.id))
+        }
+
+    }
+
+    @Test
     internal fun `when remove is called and there is not a todo with the id should return false`() {
         runBlocking {
             val fromTask = Todo.fromTask("dummy")

@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -62,7 +63,7 @@ class TodoControllerTest {
                 .responseBody.blockFirst()!!
 
         runBlocking {
-            repository.existsById(id)
+            assertTrue(repository.existsById(id))
         }
     }
 
@@ -120,9 +121,8 @@ class TodoControllerTest {
         else Status.COMPLETE
 
     private fun callTheUpdate(todo: Todo) = webClient.patch()
-            .uri("/todos")
+            .uri("/todos/${todo.id.value}")
             .contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromValue(todo))
             .exchange()
             .expectStatus()
             .isOk

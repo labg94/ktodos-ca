@@ -2,6 +2,7 @@ package com.example.ktodosca.presentation.rest
 
 import com.example.ktodosca.domain.todo.Status
 import com.example.ktodosca.domain.todo.Todo
+import com.example.ktodosca.domain.todo.TodoId
 import com.example.ktodosca.presentation.rest.request.TaskRequest
 import com.example.ktodosca.usecase.todo.NewTaskAdded
 import com.example.ktodosca.usecase.todo.StatusChange
@@ -28,8 +29,7 @@ class TodoController(
     @GetMapping("{status}")
     suspend fun getByStatus(@PathVariable status: Status): Flow<Todo> = fetcher.byStatus(status)
 
-    @PatchMapping
-    suspend fun updateNextStatus(@RequestBody todo: Todo): Todo = statusChange.nextStatus(todo)
-
+    @PatchMapping("{id}")
+    suspend fun updateNextStatus(@PathVariable id: String): Todo = statusChange.nextStatus(TodoId(id))
 
 }

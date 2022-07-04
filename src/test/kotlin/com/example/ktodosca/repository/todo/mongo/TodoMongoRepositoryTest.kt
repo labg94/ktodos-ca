@@ -44,6 +44,7 @@ class TodoMongoRepositoryTest {
     @Nested
     inner class LoadedTodos {
         private val todos: List<Todo> = todos()
+
         @BeforeEach
         fun setUp() {
             runBlocking {
@@ -73,6 +74,20 @@ class TodoMongoRepositoryTest {
         fun `when existById is called and the todo was not saved before should return false`() {
             runBlocking {
                 assertFalse(repository.existsById(TodoId()))
+            }
+        }
+
+        @Test
+        fun `when findById is called and the todo was saved before should return its value`() {
+            runBlocking {
+                val first = todos.first()
+                assertEquals(first, repository.findById(first.id))
+            }
+        }
+        @Test
+        fun `when findById is called and the todo was not saved before should return null`() {
+            runBlocking {
+                assertNull(repository.findById(TodoId()))
             }
         }
 

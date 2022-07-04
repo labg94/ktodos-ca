@@ -26,6 +26,7 @@ class TodoMongoRepository(private val dao: TodoMongoDao) : CreateTodo, GetTodos,
         dao.findAllByStatus(status.toString()).map { it.toDomain() }.asFlow()
 
     override suspend fun existsById(id: TodoId): Boolean = dao.existsById(id.value).awaitSingle()
+    override suspend fun findById(id: TodoId): Todo? = dao.findById(id.value).awaitSingleOrNull()?.toDomain()
 
     override suspend fun update(todo: Todo): Todo = addTodo(todo)
 

@@ -22,7 +22,7 @@ class StatusChangeTest {
 
         val todo = Todo.fromTask("Dummy 2")
         val exceptionThrown = assertThrows(RegisterNotFoundException::class.java) {
-            runBlocking { useCase.nextStatus(todo) }
+            runBlocking { useCase.nextStatus(todo.id) }
         }
         assertEquals("the todo with Id ${todo.id} does not exists", exceptionThrown.message)
     }
@@ -30,7 +30,7 @@ class StatusChangeTest {
     @Test
     fun `when exists but it could not be rewritten should throw an exception`() {
         val exceptionThrown = assertThrows(OperationFailedException::class.java) {
-            runBlocking { useCase.nextStatus(notUpdateTodo) }
+            runBlocking { useCase.nextStatus(notUpdateTodo.id) }
         }
         assertEquals("we could not update the todo with id ${notUpdateTodo.id}", exceptionThrown.message)
     }
@@ -39,7 +39,7 @@ class StatusChangeTest {
 
     fun `when is updated should return the todo with the new status`() {
         runBlocking {
-            val updated = useCase.nextStatus(dummyTodo)
+            val updated = useCase.nextStatus(dummyTodo.id)
             assertEquals(updated.status.ordinal, dummyTodo.status.ordinal + 1)
         }
     }

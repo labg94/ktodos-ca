@@ -24,6 +24,7 @@ class InMemoryRepository : CreateTodo, GetTodos, UpdateTodo {
     override suspend fun withStatus(status: Status): Flow<Todo> = todos.filter { it.status === status }.asFlow()
 
     override suspend fun existsById(id: TodoId): Boolean = todos.find { it.id == id } !== null
+    override suspend fun findById(id: TodoId): Todo? = todos.find { it.id == id }
 
     override suspend fun update(todo: Todo): Todo = addTodo(todo)
 

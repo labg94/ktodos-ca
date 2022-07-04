@@ -7,6 +7,7 @@ import com.example.ktodosca.domain.todo.repository.UpdateTodo
 
 class FakeUpdateTodoRepository(private val todos: MutableList<Todo>) : UpdateTodo {
     override suspend fun existsById(id: TodoId): Boolean = todos.find { it.id.value === id.value } !== null
+    override suspend fun findById(id: TodoId): Todo? = todos.find { it.id == id }
 
     override suspend fun update(todo: Todo): Todo = todo.apply { todos.add(this) }
 
