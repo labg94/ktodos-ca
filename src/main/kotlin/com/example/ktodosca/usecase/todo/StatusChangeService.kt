@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service
 
 @Service
 class StatusChangeService(private val repository: UpdateTodo) : StatusChange {
-    override suspend fun nextStatus(id: TodoId): Todo {
-        val todo = (repository.findById(id).apply { println("THE VALUE $this")  } ?: throw RegisterNotFoundException("the todo with Id $id does not exists"))
-        return removeAndUpdate(
-            todo
-                              )
-    }
+    override suspend fun nextStatus(id: TodoId): Todo =
+        removeAndUpdate(
+            (repository.findById(id) ?: throw RegisterNotFoundException("the todo with Id $id does not exists"))
+                       )
 
 
     private suspend fun removeAndUpdate(todo: Todo): Todo =

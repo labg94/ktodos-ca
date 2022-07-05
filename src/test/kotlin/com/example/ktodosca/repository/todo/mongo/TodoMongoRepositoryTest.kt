@@ -81,7 +81,7 @@ class TodoMongoRepositoryTest {
         fun `when findById is called and the todo was saved before should return its value`() {
             runBlocking {
                 val first = todos.first()
-                assertEquals(first, repository.findById(first.id))
+                assertEquals(first.task, repository.findById(first.id)?.task)
             }
         }
         @Test
