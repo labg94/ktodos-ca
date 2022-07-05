@@ -1,0 +1,5 @@
+{
+  "name": "Todos with kotlin and clean architecture",
+  "schemaPath": "src/main/resources/graphql/schema.graphqls",
+  "extensions": {}
+}

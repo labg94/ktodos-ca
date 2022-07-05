@@ -1,0 +1,17 @@
+type Query{
+    getAll: [Todo]
+    getByStatus(status: Status!): [Todo]
+}
+
+
+type Todo {
+    id: ID!
+    task: String!,
+    creationDate: String!,
+    lastUpdate:String!,
+    status: Status!
+}
+
+enum Status{
+    CREATED,WORKING_ON,COMPLETE
+}
