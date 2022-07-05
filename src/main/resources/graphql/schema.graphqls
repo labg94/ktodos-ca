@@ -3,6 +3,11 @@ type Query{
     getByStatus(status: Status!): [Todo]
 }
 
+type Mutation{
+    createTodo(task: String!) : Todo!
+    nextStatus(id: String!): Todo!
+}
+
 
 type Todo {
     id: ID!
